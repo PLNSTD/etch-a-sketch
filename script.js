@@ -1,6 +1,7 @@
 const container = document.querySelector('#container');
 
 let gridCreator = () => {
+    container.style.padding = "10px";
     container.style.display = "flex";
     container.style.flexWrap = "wrap";
     container.style.flexDirection = "row";
@@ -8,7 +9,7 @@ let gridCreator = () => {
         for(let col = 0; col < 16; col++) {
             let newDiv = document.createElement('div');
             // newDiv.style.cssText = "width: 5vw; height: 6vh; border: solid 1px #000";
-            newDiv.style.cssText = "border: solid 1px #000; padding: 5px; flex: 1 1 6.25%";
+            newDiv.style.cssText = "border: solid 1px #000; height: 60px; flex-basis: 6%";
             newDiv.classList.add('cell');
             newDiv.addEventListener('mouseover', function() {
                 newDiv.classList.add('hovered-cell');
