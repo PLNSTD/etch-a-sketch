@@ -1,15 +1,13 @@
-const container = document.querySelector('#container');
-
-let gridCreator = () => {
-    container.style.padding = "5px";
-    container.style.display = "flex";
-    container.style.flexWrap = "wrap";
-    container.style.flexDirection = "row";
-    for(let row = 0; row < 16; row++) {
-        for(let col = 0; col < 16; col++) {
+const gridContainer = document.querySelector('#grid-container');
+const resizeValue = document.querySelector('#resize-value');
+const resizeButton = document.querySelector('#resize-button');
+let createGrid = (sizeM) => {
+    const fillPercentage = Math.floor(100 / sizeM);
+    console.log(fillPercentage);
+    for(let row = 0; row < sizeM; row++) {
+        for(let col = 0; col < sizeM; col++) {
             let newDiv = document.createElement('div');
-            // newDiv.style.cssText = "width: 5vw; height: 6vh; border: solid 1px #000";
-            newDiv.style.cssText = "border: solid 1px #000; height: 5.9vh; flex-basis: 6%";
+            newDiv.style.cssText = `background-color: #fffcfb; flex-basis: ${fillPercentage}%`;
             newDiv.classList.add('cell');
             newDiv.addEventListener('mouseover', function() {
                 newDiv.classList.add('hovered-cell');
@@ -18,11 +16,19 @@ let gridCreator = () => {
                     newDiv.classList.remove('hovered-cell');
                 }, 1200);
             });
-            container.appendChild(newDiv);
+            gridContainer.appendChild(newDiv);
         }
     }
-
-   
 }
 
-gridCreator();
+resizeButton.addEventListener('click', function() {
+    let sizeM = resizeValue.value;
+    if(sizeM > 0 && sizeM <= 100) {
+        gridContainer.textContent = '';
+        createGrid(sizeM);
+    }
+    else
+        alert('Insert a value (1-100)');
+});
+
+createGrid(16);
